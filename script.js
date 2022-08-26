@@ -20,7 +20,7 @@ addClient.addEventListener('click', function(e) {
 
     if(email.value && firstName.value && lastName.value && phone.value) {
         users.push(clientSuperObj);
-        email.value && firstName.value && lastName.value && phone.value === "";
+        email.value && firstName.value && lastName.value && phone.value === "";   
         console.log(users);
     }else{
         alert('Please enter all the fields');
@@ -31,18 +31,21 @@ addClient.addEventListener('click', function(e) {
 
 printClient.addEventListener('click', function(e) {
     e.preventDefault();
+
     if(users.length === 0){
         alert('no client member to print')
     }else{
         for(let i = 0; i < users.length; i++) {
-            document.body.innerHTML += `
-            <div class="card">
-                <h3 class="card-title">${users[i].firstName} ${users[i].lastName}</h3>
-                <div class="card-body">
-                    <p>${users[i].phone}</p>
-                    <p>${users[i].email}</p>
-                </div>
+            let div = document.createElement('div');
+            div.innerHTML = `
+            <h3 class="card-title">${users[i].firstName} ${users[i].lastName}</h3>
+            <div class="card-body">
+                <p>${users[i].phone}</p>
+                <p>${users[i].email}</p>
             </div>`;
+            div.classList.add('card');
+            usersArea.append(div)
+            users.shift();
         }
         email.value && firstName.value && lastName.value && phone.value === "";
     }
